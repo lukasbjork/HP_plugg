@@ -43,9 +43,7 @@ router.post('/explain', async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'questionId krävs' });
     }
 
-    const question = getDb()
-      .prepare('SELECT * FROM questions WHERE id = ?')
-      .get(questionId) as Question | undefined;
+    const question = (await getDb().get('SELECT * FROM questions WHERE id = ?', [questionId])) as Question | undefined;
 
     if (!question) {
       return res.status(404).json({ error: 'Frågan hittades inte' });

@@ -53,19 +53,20 @@ export function getDb(): DbClient {
       db.exec(fs.readFileSync(schemaPath, 'utf-8'));
     }
 
+    type SqlVal = string | number | null | bigint | Uint8Array;
     _client = {
       async query(sql, params) {
-        return db.prepare(sql).all(...(params ?? [])) as Row[];
+        return db.prepare(sql).all(...(params ?? []) as SqlVal[]) as Row[];
       },
       async get(sql, params) {
-        return db.prepare(sql).get(...(params ?? [])) as Row | undefined;
+        return db.prepare(sql).get(...(params ?? []) as SqlVal[]) as Row | undefined;
       },
       async run(sql, params) {
-        const r = db.prepare(sql).run(...(params ?? []));
-        return { lastInsertRowid: Number(r.lastInsertRowid), changes: r.changes };
+        const r = db.prepare(sql).run(...(params ?? []) as SqlVal[]);
+        return { lastInsertRowid: Number(r.lastInsertRowid), changes: Number(r.changes) };
       },
     };
   }
 
-  return _client;
+  return _client!;
 }

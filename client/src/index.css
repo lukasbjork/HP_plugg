@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-ki-gray font-sans text-ki-text antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-ki-blue text-white px-4 py-2 rounded-lg font-medium hover:bg-ki-blue-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-white border border-ki-gray-mid text-ki-text px-4 py-2 rounded-lg font-medium hover:bg-ki-gray transition-colors;
+  }
+
+  .btn-gold {
+    @apply bg-ki-gold text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-ki-gray-mid p-5;
+  }
+
+  .section-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+
+  /* Flip-kort för flashcards */
+  .flip-card {
+    perspective: 1000px;
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card-inner.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+
+  /* Svarsalternativ */
+  .answer-option {
+    @apply flex items-start gap-3 p-4 rounded-xl border-2 border-ki-gray-mid cursor-pointer transition-all hover:border-ki-blue hover:bg-ki-blue-pale;
+  }
+
+  .answer-option.selected {
+    @apply border-ki-blue bg-ki-blue-pale;
+  }
+
+  .answer-option.correct {
+    @apply border-green-500 bg-green-50;
+  }
+
+  .answer-option.wrong {
+    @apply border-red-400 bg-red-50;
+  }
+
+  .answer-option.disabled {
+    @apply cursor-not-allowed opacity-70;
+  }
+}
+
+/* Scrollbar-stil */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

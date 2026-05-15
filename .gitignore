@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.tmp/
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.local
+client/dist/
+*.log
+.netlify/
